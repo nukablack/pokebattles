@@ -12,7 +12,7 @@ router.route('/')
             res.json(results);
         })
     })
-    .post(function (req, res) {
+    /*.post(function (req, res) {
         let pokemonData = req.body
         let pokemonObj = new Pokemon({
             pokeId: pokemonData.pokeId,
@@ -36,7 +36,7 @@ router.route('/')
             res.status(201)
             res.setDefaultEncoding(pokemonObj.toJSON())
         })
-    });
+    });*/
 
 router.route('/:id')
     .get(function (req, res){
@@ -57,7 +57,7 @@ router.route('/:id')
             })
         }
     })
-    .put(function (req, res){
+    /*.put(function (req, res){
         let pokemonId = req.params.id
         let pokemonData = req.body
         Pokemon.findOne({pokeId: pokemonId}).exec(function (err, result){
@@ -92,6 +92,6 @@ router.route('/:id')
                 })
             }
         })
-    });
+    });*/
 
     module.exports = router;

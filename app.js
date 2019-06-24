@@ -8,6 +8,8 @@ const app = express()
 const dbConnStr = "mongodb+srv://ddawuser:BncQBkYE2Me3l1mH@ddaw-test-3cwg2.mongodb.net/pokebattles_test?retryWrites=true&w=majority"
 const routePrefix = "/api/v1"
 
+const pokemonsRouter = require('./routes/pokemons')
+
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -21,6 +23,8 @@ db.once('open', function(){
 })
 
 mongoose.connect(dbConnStr, { useNewUrlParser: true, useFindAndModify: false })
+
+app.use(`${routePrefix}/pokemons`, pokemonsRouter)
 
 app.listen(process.env.PORT || 8080, function(){
     console.log('Servidor activo en http://localhost:8080')
