@@ -13,7 +13,7 @@ let pokemonSchema = new Schema({
         front: String,
         back: String
     },
-    footprint: { type: String, required: true },
+    footprint: { type: String },
     weight: { type: Number, required: true },
     height: { type: Number, required: true },
     hp: { type: Number, required: true },
