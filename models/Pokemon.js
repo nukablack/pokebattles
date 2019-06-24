@@ -20,3 +20,9 @@ let pokemonSchema = new Schema({
     attack: { type: Number, required: true },
     defense: { type: Number, required: true }
 })
+
+pokemonSchema.set('toJSON', { getters: true, virtuals: false })
+
+let PokemonModel = mongoose.model('Pokemon', pokemonSchema);
+
+module.exports = PokemonModel;
