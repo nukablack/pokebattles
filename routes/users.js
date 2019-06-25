@@ -17,15 +17,18 @@ router.route('/')
     })
     .post(function(req, res){
         let userData = req.body
+        console.log(userData)
         let userObj = new User({
             email: userData.email,
             nickname: userData.nickname,
             password: sha512(userData.password),
+            role: userData.role,
+            enabled: userData.enabled,
             pokemon: {
-                hp: userData.hp, 
-                attack: userData.attack,
-                defense: userData.defense,
-                pokemonId: userData.pokemonId
+                hp: userData.pokemon.hp, 
+                attack: userData.pokemon.attack,
+                defense: userData.pokemon.defense,
+                pokemonId: userData.pokemon.pokemonId
             }
         })
 
@@ -39,10 +42,10 @@ router.route('/')
                 if( err.code !== 110000 ){
                     throw err
                 }
-
-                res.status(201)
-                res.json(userObj.toJSON())
             }
+
+            res.status(201)
+            res.json(userObj.toJSON())
         })
     })
 

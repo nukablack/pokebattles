@@ -9,11 +9,11 @@ let userSchema = new Schema({
     enabled: { type: Boolean, default: true },
     role: { type: String, default: 'user' },
     pokemon: {
-        hp: { type: Number, required: true },
-        attack: { type: Number, required: true },
-        defense: { type: Number, required: true },
-        pokemonId: { type: Schema.ObjectId, ref: "Pokemon"}}
-
+        hp: { type: Number },
+        attack: { type: Number },
+        defense: { type: Number },
+        pokemonId: { type: Schema.ObjectId, ref: "Pokemon"}
+    }
 })
 
 userSchema.set('toJSON', { getters: true, virtuals: false })
