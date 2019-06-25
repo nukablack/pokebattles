@@ -57,7 +57,7 @@ router.route('/:user')
     .get(function (req, res) {
         let userSearch = req.params.user
         
-        User.findOne().where("nickname" == userSearch || "email" == userSearch).exec(function (err, result){
+        User.find({$or: [{"nickname": userSearch}, {"email": userSearch}]}, "-password").exec(function (err, result){
             if (err){
                 throw err
             }
@@ -66,13 +66,9 @@ router.route('/:user')
                 res.status(404)
                 res.send('Usuario no encontrado')
             }
-
             if (result) {
-                
-                let userJSON = result.toJSON()
-                delete userJSON.password
 
-                res.json(userJSON)
+                res.json(result)
             }
         })
     })
