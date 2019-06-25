@@ -14,7 +14,7 @@ let userSchema = new Schema({
         defense: { type: Number },
         pokemonId: { type: Schema.ObjectId, ref: "Pokemon"}
     },
-    pokedex: [{type: Schema.ObjectId, ref: "Pokemon"}]
+    pokedex: [{type: Object}]
 })
 
 userSchema.set('toJSON', { getters: true, virtuals: false })
