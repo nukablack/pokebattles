@@ -96,3 +96,5 @@ router.route('/:user')
             }
         })
     })
+
+module.exports = route;
