@@ -4,10 +4,13 @@ const sha512 = require('js-sha512')
 const router = express.Router()
 
 let User = require('../models/User')
+let Pokemon = require('../models/Pokemon')
 
 router.route('/')
     .get(function (req, res){
-        User.find().exec(function (err, results){
+        //Método populate formatea para mostrar los datos del ID referenciado.
+        //Al usar "-" delante de cada dato, lo que indicamos es que no queremos mostrarlo.
+        User.find().populate('pokemon.pokemonId', "-hp -attack -defense").exec(function (err, results){
             if (err){
                 throw err
             }
@@ -29,7 +32,8 @@ router.route('/')
                 attack: userData.pokemon.attack,
                 defense: userData.pokemon.defense,
                 pokemonId: userData.pokemon.pokemonId
-            }
+            },
+            pokedex: userData.pokedex
         })
 
         userObj.save(function(err) {
