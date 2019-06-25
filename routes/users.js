@@ -1,6 +1,6 @@
-const express = required('express')
-const mongoose = required('mongoose')
-const sha512 = required('js-sha512')
+const express = require('express')
+const mongoose = require('mongoose')
+const sha512 = require('js-sha512')
 const router = express.Router()
 
 let User = require('../models/User')
