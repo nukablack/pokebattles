@@ -4,7 +4,6 @@ const sha512 = require('js-sha512')
 const router = express.Router()
 
 let User = require('../models/User')
-let Pokemon = require('../models/Pokemon')
 
 router.route('/')
     .get(function (req, res){
@@ -15,7 +14,18 @@ router.route('/')
                 throw err
             }
 
-            res.json(results);
+            let output = []
+            
+            results.forEach( (data) => {
+                  output.push({
+                      nickname: data.nickname,
+                      email: data.email,
+                      squad: data.poke_squad
+                  })
+                }
+            )
+
+            res.json(output);
         })
     })
     .post(function(req, res){
@@ -27,13 +37,13 @@ router.route('/')
             password: sha512(userData.password),
             role: userData.role,
             enabled: userData.enabled,
-            pokemon: {
-                hp: userData.pokemon.hp, 
-                attack: userData.pokemon.attack,
-                defense: userData.pokemon.defense,
-                pokemonId: userData.pokemon.pokemonId
-            },
-            pokedex: userData.pokedex
+            poke_squad: [{
+                hp: userData.poke_squad.hp, 
+                attack: userData.poke_squad.attack,
+                defense: userData.poke_squad.defense,
+                pokemonId: userData.poke_squad.pokemonId
+            }],
+            pokedex: [ userData.poke_squad.pokemonId ]
         })
 
         userObj.save(function(err) {

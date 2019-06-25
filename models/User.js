@@ -8,13 +8,13 @@ let userSchema = new Schema({
     password: { type: String, required: true },
     enabled: { type: Boolean, default: true },
     role: { type: String, default: 'user' },
-    pokemon: {
+    poke_squad: [{
         hp: { type: Number },
         attack: { type: Number },
         defense: { type: Number },
         pokemonId: { type: Schema.ObjectId, ref: "Pokemon"}
-    },
-    pokedex: [{type: Object}]
+    }],
+    pokedex: [  { type: Schema.ObjectId, ref: "Pokemon"}  ]
 })
 
 userSchema.set('toJSON', { getters: true, virtuals: false })
