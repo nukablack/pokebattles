@@ -97,4 +97,4 @@ router.route('/:user')
         })
     })
 
-module.exports = route;
+module.exports = router;
