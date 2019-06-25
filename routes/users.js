@@ -20,7 +20,13 @@ router.route('/')
         let userObj = new User({
             email: userData.email,
             nickname: userData.nickname,
-            password: sha512(userData.password)
+            password: sha512(userData.password),
+            pokemon: {
+                hp: userData.hp, 
+                attack: userData.attack,
+                defense: userData.defense,
+                pokemonId: userData.pokemonId
+            }
         })
 
         userObj.save(function(err) {
@@ -82,8 +88,11 @@ router.route('/:user')
                 result.nickname = userData.nickname
                 result.password = sha512(userData.password)
                 result.pokemon = {
-                    "name" = user
-                }
+                    hp: userData.hp, 
+                    attack: userData.attack,
+                    defense: userData.defense,
+                    pokemonId: userData.pokemonId
+                    }
             }
         })
     })

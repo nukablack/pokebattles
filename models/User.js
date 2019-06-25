@@ -8,7 +8,11 @@ let userSchema = new Schema({
     password: { type: String, required: true },
     enabled: { type: Boolean, default: true },
     role: { type: String, default: 'user' },
-    pokemon: {selected: { type: Schema.ObjectId, ref: "Pokemon"}}
+    pokemon: {
+        hp: { type: Number, required: true },
+        attack: { type: Number, required: true },
+        defense: { type: Number, required: true },
+        pokemonId: { type: Schema.ObjectId, ref: "Pokemon"}}
 
 })
 
