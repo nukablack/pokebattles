@@ -4,7 +4,7 @@ let Pokemon = require('../models/Pokemon')
 
 router.route('/')
     .get(function (req, res) {
-        Pokemon.find().exec(function (err, results){
+        Pokemon.find().sort('pokeId').exec(function (err, results){
             if (err) {
                 throw err
             }
