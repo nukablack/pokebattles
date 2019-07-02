@@ -105,7 +105,7 @@ router.route('/:user')
                     attack: userData.attack,
                     defense: userData.defense,
                     pokemonId: userData.pokemonId
-                    }
+                }
             }
         })
     })
