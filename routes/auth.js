@@ -1,5 +1,6 @@
-const router = express.router()
-const user = require('..models/User')
+const express = require('express')
+const router = express.Router()
+const User = require('../models/User')
 const sha512 = require('js-sha512')
 const jwt = require('jsonwebtoken')
 
@@ -26,7 +27,7 @@ router.post('/', async (req, res) =>{
             res.json({token: token})
         }
     })
-);
+    );
 })
 
 /*//Verificación
@@ -51,4 +52,4 @@ router.get('/', async (req, res) =>{
     })
 });*/
 
-module.export = router;
+module.exports = router;
