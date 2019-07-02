@@ -4,31 +4,32 @@ const sha512 = require('js-sha512')
 const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) =>{
-    await User.findOne(nickname: req.body.name, (err, user) => {
+    await User.findOne({name: req.body.name, password: sha512(req.body.password)}.exec((err, user) => {
         if (err){
-            return res.status(500).json({
-                title: 'server error',
-                error: err
-            })
+            throw error
         }
-        //incorrect user or password
-        if(!user || !sha512.compareSync(req.body.password, user.password)){
-            return res.status(401).json({
-                title: 'login failed',
-                error: 'invalid credentials'
-            });
+
+        if(!result){
+            res.status(403)
+            res.send("Usuario o contraseña incorrecto")
         }
-        //ig all is good
-        let token = jwt.sign({userId: user._id, nickname: user.name, usermail: user.mail}, 'secretKey');
-        return res.status(200).json({
-            title: `Login success`,
-            token: token
-            })
+        
+        if(result){
+            let user = {
+                id: result._id,
+                name: result.name
+            }
+
+            let token = jwt.sign(user, req.app.get('secretKey'));
+            result.save()
+
+            res.json({token: token})
         }
     })
 );
+})
 
-//Verificación
+/*//Verificación
 router.get('/', async (req, res) =>{
     let token = await req.headers.token;
     jwt.verify(token, 'secretKey', (err, decoded) => {
@@ -48,6 +49,6 @@ router.get('/', async (req, res) =>{
             })
         })
     })
-});
+});*/
 
-module.exports = router;
+module.export = router;
