@@ -58,6 +58,7 @@ router.route('/')
                 }
             }
 
+            console.log('Usuario registrado')
             res.status(201)
             res.json(userObj.toJSON())
         })
@@ -67,7 +68,7 @@ router.route('/:user')
     .get(function (req, res) {
         let userSearch = req.params.user
         
-        User.find({$or: [{"nickname": userSearch}, {"email": userSearch}]}, "-password").exec(function (err, result){
+        User.findOne({$or: [{"nickname": userSearch}, {"email": userSearch}]}, "-password").populate("poke_squad.pokemonId").exec(function (err, result){
             if (err){
                 throw err
             }
@@ -77,8 +78,19 @@ router.route('/:user')
                 res.send('Usuario no encontrado')
             }
             if (result) {
-
-                res.json(result)
+                let output = {
+                    nickname: result.nickname,
+                    poke_squad: {
+                        hp: result.poke_squad[0].hp,
+                        attack: result.poke_squad[0].attack,
+                        defense: result.poke_squad[0].defense
+                    },
+                    pokemonInfo: {
+                        name: result.poke_squad[0].pokemonId.name,
+                        gif: result.poke_squad[0].pokemonId.gifs.back
+                    }
+                } 
+                res.json(output)
             }
         })
     })

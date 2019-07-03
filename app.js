@@ -29,6 +29,6 @@ app.use(`${routePrefix}/pokemons`, pokemonsRouter)
 app.use(`${routePrefix}/users`, userRouter)
 app.use(`${routePrefix}/login`, loginRouter)
 
-app.listen(process.env.PORT || 8080, function(){
-    console.log('Servidor activo en http://localhost:8080')
+app.listen(process.env.PORT || 3000, function(){
+    console.log('Servidor activo en http://localhost:3000')
 })
