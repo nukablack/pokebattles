@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const app = express()
-const dbConnStr = "mongodb+srv://ddawuser:BncQBkYE2Me3l1mH@ddaw-test-3cwg2.mongodb.net/pokebattles_test?retryWrites=true&w=majority"
+const dbConnStr = "mongodb+srv://ddawuser:BncQBkYE2Me3l1mH@ddaw-test-3cwg2.mongodb.net/pokebattles?retryWrites=true&w=majority"
 const routePrefix = "/api/v1"
 
 const pokemonsRouter = require('./routes/pokemons')
